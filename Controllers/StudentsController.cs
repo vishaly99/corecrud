@@ -33,6 +33,10 @@ namespace curdoperation.Controllers
                                        join c in _context.Customer on bv.Custid equals c.Cid
                                        where bv.Vehicle.Vname.Contains(parameter)
                                        select bv).Include(s => s.Vehicle).Include(s => s.Cust).ToListAsync();*/
+                    /*DateTime date1, DateTime date2
+                     * var data2 = await (from bv in _context.BookVehicle
+                                       where bv.Bookdate >= date1 && bv.Bookdate <= date2
+                                       select bv).Include(o => o.Vehicle).Include(o => o.Cust).ToListAsync();*/
 
                     return View(datatuple);
                     break;
