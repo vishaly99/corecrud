@@ -1,0 +1,70 @@
+﻿@model Tuple<List<Student>>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<div class="row">
+    <div class="col"><p>
+    <a asp-action="Create">Create New</a>
+</p></div>
+    <div class="col">
+        <form asp-action="index" method="get" class="form-group form-inline">
+            <select class="form-control" name="searchtype" value=@ViewData["searchtype"]>
+                <option value="selected" selected>Select Search Type</option>
+                <option value="name">Name</option>
+            </select>
+            <input type="text" class="form-control" name="parameter" value=@ViewData["parameter"] />
+            <input type="submit" class="form-control" value="search" />
+
+        </form>
+    </div>
+</div>
+
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                    Name
+            </th>
+            <th>
+               Age
+            </th>
+            <th>
+              Gender
+            </th>
+            <th>
+            Course Name
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Item1) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Age)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Gender)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Course.CourseName)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.StudentId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.StudentId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.StudentId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
